@@ -1,0 +1,6 @@
+{
+  "name": "Clase Piedras Vivas",
+  "description": "Herramienta ágil de registro de asistencia, participación y puntos de escuela dominical.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

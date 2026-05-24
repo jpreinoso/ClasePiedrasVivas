@@ -1,0 +1,63 @@
+{
+  "entities": {
+    "Student": {
+      "title": "Student",
+      "description": "Un alumno de la clase de escuela dominical",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "ID único del alumno" },
+        "name": { "type": "string", "description": "Nombre completo" },
+        "gender": { "type": "string", "enum": ["M", "F"], "description": "Sexo del alumno (M o F)" },
+        "birthDate": { "type": "string", "format": "date", "description": "Fecha de nacimiento en formato YYYY-MM-DD" },
+        "photo": { "type": "string", "description": "Foto comprimida y codificada en Base64" },
+        "createdAt": { "type": "string", "description": "Timestamp de creación" }
+      },
+      "required": ["id", "name", "gender"]
+    },
+    "Record": {
+      "title": "Record",
+      "description": "Registro de asistencia, puntualidad y logros del alumno para una fecha",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "ID del registro (ej: studentId_date)" },
+        "studentId": { "type": "string", "description": "ID del alumno" },
+        "date": { "type": "string", "format": "date", "description": "Fecha del registro en formato YYYY-MM-DD" },
+        "asistencia": { "type": "boolean", "description": "Si estuvo presente" },
+        "puntualidad": { "type": "boolean", "description": "Si llegó a tiempo" },
+        "biblia": { "type": "boolean", "description": "Si trajo su Biblia" },
+        "participacion": { "type": "boolean", "description": "Si participó activamente" },
+        "versiculo": { "type": "boolean", "description": "Si recitó el versículo de memoria" },
+        "visitas": { "type": "integer", "description": "Número de visitas invitadas" },
+        "puntosExtras": { "type": "integer", "description": "Puntos extraordinarios (positivos o negativos)" },
+        "updatedAt": { "type": "string", "description": "Timestamp de actualización" }
+      },
+      "required": ["id", "studentId", "date", "asistencia"]
+    },
+    "Period": {
+      "title": "Period",
+      "description": "Periodo académico o bimestre de evaluación",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "ID del periodo" },
+        "name": { "type": "string", "description": "Nombre representativo del periodo" },
+        "startDate": { "type": "string", "format": "date", "description": "Fecha de inicio (YYYY-MM-DD)" },
+        "endDate": { "type": "string", "format": "date", "description": "Fecha de fin (YYYY-MM-DD)" }
+      },
+      "required": ["id", "name", "startDate", "endDate"]
+    }
+  },
+  "firestore": {
+    "/students_{classCode}/{studentId}": {
+      "schema": "Student",
+      "description": "Colección de alumnos filtrados por código de clase"
+    },
+    "/records_{classCode}/{recordId}": {
+      "schema": "Record",
+      "description": "Colección de registros diarios de calificaciones de alumnos filtrados por código de clase"
+    },
+    "/periods_{classCode}/{periodId}": {
+      "schema": "Period",
+      "description": "Colección de periodos académicos filtrados por código de clase"
+    }
+  }
+}
